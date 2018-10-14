@@ -1,9 +1,13 @@
 import requests
 import math
 import json
+import sys
 
 schedule_url = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x"
 res = requests.get(schedule_url)
+
+if res.satus_code != 200:
+    sys.exit()
 
 res.encoding = "utf-8"
 json_str = res.text.split('\r')[0]
