@@ -3,37 +3,40 @@ import math
 import json
 import sys
 
-schedule_url = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x"
-res = requests.get(schedule_url)
+def get_schedule(schedule_url):
+    res = requests.get(schedule_url)
 
-if res.satus_code != 200:
-    sys.exit()
+    if res.status_code == 200:
 
-res.encoding = "utf-8"
-json_str = res.text.split('\r')[0]
-자료 = json.loads(json_str)
+        res.encoding = "utf-8"
+        json_str = res.text.split('\r')[0]
+        자료 = json.loads(json_str)
 
-학년 = 1
-반 = 7
+        학년 = 1
+        반 = 7
 
-n요일 = [None] * 5
-for 요일 in range(1, 6):
-    print(요일)
-    n교시 = [None] * 7
-    for 교시 in range(1, 8):
-        원자료 = 자료["자료81"][학년][반][요일][교시]
-        일일자료 = 자료["자료14"][학년][반][요일][교시]
+        n요일 = [None] * 5
+        for 요일 in range(1, 6):
+            n교시 = [None] * 7
+            for 교시 in range(1, 8):
+                원자료 = 자료["자료81"][학년][반][요일][교시]
+                일일자료 = 자료["자료14"][학년][반][요일][교시]
 
-        선생님_num = math.floor(일일자료 / 100)
-        과목_num = 일일자료 - 선생님_num * 100
+                선생님_num = math.floor(일일자료 / 100)
+                과목_num = 일일자료 - 선생님_num * 100
 
-        선생님 = 자료["자료46"][선생님_num]
-        과목 = 자료["자료92"][과목_num]
+                선생님 = 자료["자료46"][선생님_num]
+                과목 = 자료["자료92"][과목_num]
 
-        n교시[교시 - 1] = [과목, 선생님]
-    n요일[요일 - 1] = n교시
+                n교시[교시 - 1] = [과목, 선생님]
+                n요일[요일 - 1] = n교시
 
-comci = { "요일" : n요일 }
+    return n요일
 
-file = open("comci.json", "wt")
+this_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x"
+next_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8y"
+
+comci = [get_schedule(this_week), get_schedule(next_week)]
+
+file = open("/mnt/server/schedule/comci.json", "wt")
 json.dump(comci, file, ensure_ascii=False)
