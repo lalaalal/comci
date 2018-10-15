@@ -4,6 +4,8 @@ http://comci.kr/st/ => http://comci.kr:4081/st
 
 브라우저 Local Storage => key = hour
 
-대진고 수업시간표 데이터 => http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x
+대진고 수업시간표 데이터
+이번주 => http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x
+다음주 => http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8y
 
 http://comci.kr:4081/st 소스 분석 => http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x = json, 구조 파악

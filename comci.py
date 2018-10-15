@@ -19,7 +19,6 @@ def get_schedule(schedule_url):
         for 요일 in range(1, 6):
             n교시 = [None] * 7
             for 교시 in range(1, 8):
-                원자료 = 자료["자료81"][학년][반][요일][교시]
                 일일자료 = 자료["자료14"][학년][반][요일][교시]
 
                 선생님_num = math.floor(일일자료 / 100)
@@ -31,7 +30,8 @@ def get_schedule(schedule_url):
                 n교시[교시 - 1] = [과목, 선생님]
                 n요일[요일 - 1] = n교시
 
-    return n요일
+        return n요일
+    return None
 
 this_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x"
 next_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8y"
