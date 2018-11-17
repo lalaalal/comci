@@ -14,6 +14,7 @@ def get_schedule(schedule_url):
 
         학년 = 1
         반 = 7
+        print(자료["시작일"]);
 
         n요일 = [None] * 5
         for 요일 in range(1, 6):
@@ -30,13 +31,17 @@ def get_schedule(schedule_url):
                 n교시[교시 - 1] = [과목, 선생님]
                 n요일[요일 - 1] = n교시
 
-        return n요일
+        re = { "start" : 자료["시작일"], "schedule" : n요일 }
+        return re
     return None
 
 this_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8x"
 next_week = "http://comci.kr:4081/98372?MzQ3MzlfMTU1MDlfMF8y"
 
-comci = [get_schedule(this_week), get_schedule(next_week)]
+comci = {
+    "this" : get_schedule(this_week),
+    "next" : get_schedule(next_week)
+}
 
 file = open("/mnt/server/schedule/comci.json", "wt")
 json.dump(comci, file, ensure_ascii=False)
