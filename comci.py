@@ -44,4 +44,4 @@ comci = {
 }
 
 file = open("/mnt/server/schedule/comci.json", "wt")
-json.dump(comci, file, ensure_ascii=False)
+json.dump(comci, file, ensure_ascii=True)
