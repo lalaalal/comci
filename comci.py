@@ -12,7 +12,7 @@ def get_schedule(schedule_url):
         json_str = res.text.split('\r')[0]
         자료 = json.loads(json_str)
 
-        학년 = 1
+        학년 = 2
         반 = 7
         print(자료["시작일"]);
 
